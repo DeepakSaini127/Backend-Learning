@@ -18,9 +18,9 @@ export{ asyncHandler }
 
 
 
-
 //Second way 
 
+/*
 // const asyncHandler = (fn)=> async (req, res, next)=>{
 //     try {
 //         await fn(req, res, next)
@@ -33,3 +33,4 @@ export{ asyncHandler }
 //     }
 
 // }
+*/
