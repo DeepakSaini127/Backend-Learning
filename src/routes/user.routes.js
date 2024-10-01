@@ -29,7 +29,7 @@ router.route("/login").post(loginUser)
 
 //Secured Routes
 router.route("/logout").post(verifyjwt ,logoutUser)
-
+//                Middleware^^^^^
 
 
 export default router;

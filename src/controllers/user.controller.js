@@ -82,6 +82,9 @@ const registarUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User regestered Successfully."));
 });
 
+
+
+
 const loginUser = asyncHandler(async (req, res) => {
   // req body say data lana
   // username or email check
@@ -101,11 +104,17 @@ const loginUser = asyncHandler(async (req, res) => {
     $or: [{ username }, { email }],
   });
 
+
+ 
+  
+
   if (!user) {
     throw new ApiError(404, "User dose not exist.");
   }
 
   const isPasswordValid = await user.isPasswordCorrect(password);
+
+ 
 
   if (!isPasswordValid) {
     throw new ApiError(401, "Invalid user credentials(Wrong Password)");
@@ -117,6 +126,9 @@ const loginUser = asyncHandler(async (req, res) => {
  const loggedInUser = await User.findById(user._id).select(
   "-password -refreshToken"
  )
+
+ console.log(loggedInUser);
+ 
 
  const options = {
   httpOnly: true,
@@ -136,6 +148,12 @@ const loginUser = asyncHandler(async (req, res) => {
   )
  )
 });
+
+
+
+
+
+
 
 const logoutUser = asyncHandler( async (req, res)=>{
 
@@ -160,7 +178,7 @@ const logoutUser = asyncHandler( async (req, res)=>{
   return res
   .status(200)
   .clearCookie("accessToken", options)
-  .cookie("refreshToken", options)
+  .clearCookie("refreshToken", options)
   .json(new ApiResponse(200, {}, "User Logged out"))
 
 
